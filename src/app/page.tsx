@@ -2,6 +2,7 @@ import { SlowContent } from "@/app/content";
 import {
   NuqsDrawer,
   NuqsDrawerContent,
+  NuqsDrawerProvider,
   NuqsDrawerTrigger,
   NuqsDrawerTriggerShallow,
 } from "@/app/drawer";
@@ -14,17 +15,31 @@ export default async function Home(props: {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <NuqsDrawerTrigger />
-        <NuqsDrawerTriggerShallow />
-        <NuqsDrawer>
-          <NuqsDrawerContent>
-            {drawer === "true" ? (
-              <Suspense fallback={<div>Loading...</div>}>
-                <SlowContent />
-              </Suspense>
-            ) : null}
-          </NuqsDrawerContent>
-        </NuqsDrawer>
+        <NuqsDrawerProvider shallow={false}>
+          <NuqsDrawerTrigger />
+          <NuqsDrawer>
+            <NuqsDrawerContent>
+              {drawer === "true" ? (
+                <Suspense fallback={<div>Loading...</div>}>
+                  <SlowContent />
+                </Suspense>
+              ) : null}
+            </NuqsDrawerContent>
+          </NuqsDrawer>
+        </NuqsDrawerProvider>
+
+        <NuqsDrawerProvider shallow={true}>
+          <NuqsDrawerTriggerShallow />
+          <NuqsDrawer>
+            <NuqsDrawerContent>
+              {drawer === "true" ? (
+                <Suspense fallback={<div>Loading...</div>}>
+                  <SlowContent />
+                </Suspense>
+              ) : null}
+            </NuqsDrawerContent>
+          </NuqsDrawer>
+        </NuqsDrawerProvider>
       </main>
     </div>
   );
