@@ -12,7 +12,6 @@ export async function SlowContent() {
         <DrawerTitle>Slow Content</DrawerTitle>
         <DrawerDescription>This is a slow content</DrawerDescription>
       </DrawerHeader>
-      <div>This is a slow content</div>
     </>
   );
 }
