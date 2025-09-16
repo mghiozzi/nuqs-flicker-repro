@@ -1,6 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Drawer, DrawerContent } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import { useQueryState } from "nuqs";
 
 export function NuqsDrawerTrigger() {
@@ -34,7 +40,10 @@ export function NuqsDrawer({ children }: { children: React.ReactNode }) {
 export function NuqsDrawerContent({ children }: { children: React.ReactNode }) {
   return (
     <DrawerContent>
-      <div>Some static content</div>
+      <DrawerHeader>
+        <DrawerTitle>Drawer</DrawerTitle>
+        <DrawerDescription>This is a drawer</DrawerDescription>
+      </DrawerHeader>
       {children}
     </DrawerContent>
   );
