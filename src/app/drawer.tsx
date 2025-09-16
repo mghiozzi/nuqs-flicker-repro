@@ -1,12 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 import { useQueryState } from "nuqs";
 
 export function NuqsDrawerTrigger() {
@@ -22,29 +15,22 @@ export function NuqsDrawerTriggerShallow() {
 }
 
 export function NuqsDrawer({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useQueryState("drawer", { shallow: false });
+  const [open] = useQueryState("drawer", { shallow: false });
+  console.log("NuqsDrawer", open);
   return (
-    <Drawer
-      open={!!open}
-      onOpenChange={(open) => {
-        if (!open) {
-          setOpen(null);
-        }
-      }}
-    >
-      {children}
-    </Drawer>
+    <div>
+      Drawer Open: {!!open ? "true" : "false"} {children}
+    </div>
   );
 }
 
 export function NuqsDrawerContent({ children }: { children: React.ReactNode }) {
+  const [, setOpen] = useQueryState("drawer", { shallow: false });
   return (
-    <DrawerContent>
-      <DrawerHeader>
-        <DrawerTitle>Drawer</DrawerTitle>
-        <DrawerDescription>This is a drawer</DrawerDescription>
-      </DrawerHeader>
+    <>
+      Content:
       {children}
-    </DrawerContent>
+      <Button onClick={() => setOpen(null)}>Reset Drawer</Button>
+    </>
   );
 }
